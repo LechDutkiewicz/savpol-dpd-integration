@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Savpol ERP → DPD Kurier
 // @namespace    https://github.com/savpol
-// @version      1.9.0
+// @version      2.0.0
 // @description  Dodaje przycisk "Zamów kuriera" w widoku zamówienia (zakładka Adresy). Zbiera dane odbiorcy i otwiera DPD z autofill.
 // @author       Savpol
 // @match        https://erp.savpol.pl/*
@@ -152,7 +152,17 @@
     // Usuń wszystkie stare buttony
     document.querySelectorAll('#' + BUTTON_ID).forEach(el => el.remove());
 
-    if (adresyActive && toolbar) {
+    // Sprawdź czy widoczny wiersz "Do wysyłki" istnieje
+    let hasDoWysylki = false;
+    const rows = document.querySelectorAll('td[data-datafield="addresType"][title="Do wysyłki"]');
+    for (const r of rows) {
+      if (r.offsetParent !== null || r.offsetWidth > 0) {
+        hasDoWysylki = true;
+        break;
+      }
+    }
+
+    if (adresyActive && toolbar && hasDoWysylki) {
       const wrapper = document.createElement('div');
       wrapper.className = 'csButton _csControl csButtonAction UnderlinedButton cs-inited icon-left';
       wrapper.id = BUTTON_ID;
