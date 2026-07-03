@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Savpol ERP → DPD Kurier
 // @namespace    https://github.com/savpol
-// @version      1.8.0
+// @version      1.9.0
 // @description  Dodaje przycisk "Zamów kuriera" w widoku zamówienia (zakładka Adresy). Zbiera dane odbiorcy i otwiera DPD z autofill.
 // @author       Savpol
 // @match        https://erp.savpol.pl/*
@@ -22,27 +22,26 @@
   const CHECK_INTERVAL = 2000;
 
   // --- Selektory ERP (Certusoft) ---
+  // Prefiks: wszystkie dane z wiersza "Do wysyłki" w tabeli adresów
+  const ROW = 'td[data-datafield="addresType"][title="Do wysyłki"] ~ ';
+
   const SEL = {
     // Zakładka Adresy musi być aktywna
     adresyTab: 'li.csTabListItemHeaderContainer.csTabItemActive[title="Adresy"]',
 
-    // Pola nagłówka
-    imie:     '.csDBEditExLayoutRoot_table:has(label[title="Imię"]) input.Input',
-    nazwisko: '.csDBEditExLayoutRoot_table:has(label[title="Nazwisko"]) input.Input',
-    telefon:  '.csDBEditExLayoutRoot_table:has(label[title="Tel. kom."]) input.Input',
-    email:    '.csDBEditExLayoutRoot_table:has(label[title="E-mail"]) input.Input',
+    // Wszystko z wiersza "Do wysyłki"
+    imie:        ROW + 'td[data-datafield="Name"]',
+    nazwisko:    ROW + 'td[data-datafield="Surname"]',
+    telefon:     ROW + 'td[data-datafield="Phone"]',
+    email:       ROW + 'td[data-datafield="EMail"]',
+    miasto:      ROW + 'td[data-datafield="City"]',
+    kodPocztowy: ROW + 'td[data-datafield="PostalCode"]',
+    ulica:       ROW + 'td[data-datafield="Street"]',
+    nrDomu:      ROW + 'td[data-datafield="HNo"]',
+    nrLokalu:    ROW + 'td[data-datafield="LNo"]',
+    firma:       ROW + 'td[data-datafield="CustomerDesc"]',
 
-    // Tabela adresów — wiersz "Do wysyłki"
-    miasto:      'td[data-datafield="addresType"][title="Do wysyłki"] ~ td[data-datafield="City"]',
-    kodPocztowy: 'td[data-datafield="addresType"][title="Do wysyłki"] ~ td[data-datafield="PostalCode"]',
-    ulica:       'td[data-datafield="addresType"][title="Do wysyłki"] ~ td[data-datafield="Street"]',
-    nrDomu:      'td[data-datafield="addresType"][title="Do wysyłki"] ~ td[data-datafield="HNo"]',
-    nrLokalu:    'td[data-datafield="addresType"][title="Do wysyłki"] ~ td[data-datafield="LNo"]',
-
-    // Nazwa firmy kontrahenta
-    firma:       'td[data-datafield="CustomerDesc"]',
-
-    // Waga zagregowana
+    // Waga zagregowana (poza tabelą adresów)
     waga:        '.csAggregateFunctionResultContainer[data-caption="Waga"]',
   };
 
