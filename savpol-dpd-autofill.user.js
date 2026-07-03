@@ -6,8 +6,8 @@
 // @author       Savpol
 // @match        https://online.dpd.com.pl/*
 // @grant        none
-// @downloadURL  https://raw.githubusercontent.com/savpol/dpd-integration/main/savpol-dpd-autofill.user.js
-// @updateURL    https://raw.githubusercontent.com/savpol/dpd-integration/main/savpol-dpd-autofill.user.js
+// @downloadURL  https://raw.githubusercontent.com/LechDutkiewicz/savpol-dpd-integration/main/savpol-dpd-autofill.user.js
+// @updateURL    https://raw.githubusercontent.com/LechDutkiewicz/savpol-dpd-integration/main/savpol-dpd-autofill.user.js
 // ==/UserScript==
 
 (function () {
