@@ -6,8 +6,8 @@
 // @author       Savpol
 // @match        https://erp.savpol.pl/*
 // @grant        GM_openInTab
-// @downloadURL  https://raw.githubusercontent.com/savpol/dpd-integration/main/savpol-dpd-erp.user.js
-// @updateURL    https://raw.githubusercontent.com/savpol/dpd-integration/main/savpol-dpd-erp.user.js
+// @downloadURL  https://raw.githubusercontent.com/LechDutkiewicz/savpol-dpd-integration/main/savpol-dpd-erp.user.js
+// @updateURL    https://raw.githubusercontent.com/LechDutkiewicz/savpol-dpd-integration/main/savpol-dpd-erp.user.js
 // ==/UserScript==
 
 (function () {
