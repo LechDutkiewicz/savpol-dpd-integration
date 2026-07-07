@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Savpol DPD Autofill
 // @namespace    https://github.com/savpol
-// @version      1.6.0
+// @version      1.7.0
 // @description  Automatycznie wypełnia formularz nadania przesyłki DPD danymi z ERP Savpol.
 // @author       Savpol
 // @match        https://online.dpd.com.pl/*
@@ -205,6 +205,13 @@
         log('❌ Timeout czekania na pole wagi:', e);
         failed.push('Waga (timeout)');
       }
+    }
+
+    // Nadpisz miasto z powrotem — DPD ustawia je automatycznie po kodzie pocztowym, często błędnie dla małych miejscowości
+    if (data.miasto) {
+      await new Promise(r => setTimeout(r, 300));
+      setField(DPD.receiverCity, data.miasto);
+      log('  Miasto (ponowne):', data.miasto);
     }
 
     // Hash już wyczyszczony wcześniej
